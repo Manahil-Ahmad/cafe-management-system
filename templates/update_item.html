@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Item</title>
+    <link href='https://fonts.googleapis.com/css?family=Radley' rel='stylesheet'>
+    <style>
+        body {
+            background:linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),  url("static/images/background1.jpeg") no-repeat center center fixed;
+            font-family: 'Radley', serif;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            margin-top: 0;
+            background-color: #D5F0ED;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            font-size: 1.5em;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #F0BABA;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Radley', serif;
+            font-size: 1em;
+            width: 100%;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            text-decoration: none;
+            color: black;
+            font-size: 1.2em;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Link & Loaf - Update Product</h1>
+    </div>
+    <form method="POST" action="{{ url_for('update_item') }}">
+        <label for="old_item">Current Item Name:</label>
+        <input type="text" id="old_item" name="old_item" required>
+
+        <label for="new_item">New Item Name:</label>
+        <input type="text" id="new_item" name="new_item">
+
+        <label for="new_price">New Item Price:</label>
+        <input type="number" id="new_price" name="new_price" step="0.01">
+
+        <button type="submit">Update Item</button>
+    </form>
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <div class="back-link">
+        <a href="{{ url_for('index') }}">Back to Items</a>
+    </div>
+</body>
+</html>

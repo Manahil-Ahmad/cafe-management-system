@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <link href='https://fonts.googleapis.com/css?family=Radley' rel='stylesheet'>
+    <style>
+        /* General styling */
+        body {
+            font-family: radley, serif;
+            background:linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("static/images/background1.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #D5F0ED;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .cart-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-item {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-item h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            color: #444;
+        }
+
+        .cart-item p {
+            margin: 5px 0;
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .cart-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .cart-buttons a {
+            text-align: center;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #333;
+            background-color: #F0BABA;
+            font-size: 1.3rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .cart-buttons a:hover {
+            background-color: #e58a8a;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        a.back-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Link & Loaf - Your Cart</h1>
+
+    <div class="cart-container">
+        {% if cart %}
+            {% for item in cart %}
+                <div class="cart-item">
+                    <div>
+                        <h3>{{ item.name }}</h3>
+                        <p>Price: ${{ item.price }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: #888;">Your cart is empty.</p>
+        {% endif %}
+
+        <div class="cart-buttons">
+            <a href="{{ url_for('home') }}">Back to Home</a>
+            <a href="{{ url_for('place_order') }}">Proceed to Place Order</a>
+        </div>
+    </div>
+</body>
+</html>

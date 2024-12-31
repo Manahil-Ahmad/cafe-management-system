@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Item</title>
+    <link href='https://fonts.googleapis.com/css?family=Radley' rel='stylesheet'>
+    <style>
+        body {
+            background:linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),  url("static/images/background1.jpeg") no-repeat center center fixed;
+            font-family: 'Radley', serif;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            margin-top: 0;
+            background-color: #D5F0ED;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            font-size: 1.5em;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #F0BABA;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Radley', serif;
+            font-size: 1em;
+            width: 100%;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #333;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: #F0BABA;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Remove Item</h1>
+    </div>
+    <form method="POST" action="{{ url_for('remove_item') }}">
+        <label for="item_name">Item Name:</label>
+        <input type="text" id="item_name" name="item_name" required>
+        
+        <button type="submit">Remove Item</button>
+    </form>
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}" class="back-link">Back to Items</a>
+</body>
+</html>

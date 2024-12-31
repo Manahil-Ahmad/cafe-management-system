@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Orders</title>
+    <link href='https://fonts.googleapis.com/css?family=Radley' rel='stylesheet'>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Radley', serif;
+            background:linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url("static/images/background1.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header Styling */
+        .header {
+            background-color: #D5F0ED;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+        }
+
+        /* Order Container */
+        .order-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-item {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-item p {
+            margin: 0 0 10px;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* Buttons Styling */
+        button, a {
+            background-color: #F0BABA;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Radley', serif;
+            font-size: 1rem;
+            text-decoration: none;
+            color: black;
+            display: inline-block;
+            margin: 5px 0;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover, a:hover {
+            background-color: #e58a8a;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Actions Section */
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Centered Empty Message */
+        .empty-message {
+            text-align: center;
+            font-size: 1rem;
+            color: #777;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Link & Loaf - Current Orders</h1>
+    </div>
+    
+    <div class="order-container">
+        {% for order in orders %}
+            <div class="order-item">
+                <p>{{ order|safe }}</p>
+                <form method="POST" action="{{ url_for('process_order') }}" style="display: inline;">
+                    <button type="submit">Process Order</button>
+                </form>
+            </div>
+        {% endfor %}
+        
+        {% if not orders %}
+            <div class="empty-message">
+                <p>No orders in queue.</p>
+            </div>
+        {% endif %}
+        
+        <div class="actions">
+            <a href="{{ url_for('index') }}">Back to Items</a>
+        </div>
+    </div>
+</body>
+</html>

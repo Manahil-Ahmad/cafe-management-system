@@ -1,0 +1,112 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+</head>
+<body>
+    <h1>Add New Product</h1>
+    <form method="POST">
+        <label for="new_item">Item Name:</label>
+        <input type="text" id="new_item" name="new_item" required><br><br>
+
+        <label for="new_price">Item Price:</label>
+        <input type="text" id="new_price" name="new_price" required><br><br>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link href='https://fonts.googleapis.com/css?family=Radley' rel='stylesheet'>
+    <style>
+        body {
+            background:linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)),  url("static/images/background1.jpeg") no-repeat center center fixed;
+            font-family: 'Radley', serif;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+        }
+        .header {
+            margin-top: 0;
+            background-color: #D5F0ED;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        form {
+            font-size: 1.5em;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #F0BABA;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Radley', serif;
+            font-size: 1em;
+            width: 100%;
+        }
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+        .back-link a{
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.2em;
+            color:black;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            color: #F0BABA;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Add New Product</h1>
+    </div>
+    <form method="POST">
+        <label for="new_item">Item Name:</label>
+        <input type="text" id="new_item" name="new_item" required>
+
+        <label for="new_price">Item Price:</label>
+        <input type="text" id="new_price" name="new_price" required>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <div class="back-link">
+        <a href="{{ url_for('index') }}">Back to Dashboard</a>
+    </div>
+</body>
+</html>

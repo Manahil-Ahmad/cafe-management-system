@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Radley' rel='stylesheet'>
+    <title>Place Order</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: radley, serif;
+            background:linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url("static/images/background1.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1, h2 {
+            text-align: center;
+            background-color: #D5F0ED;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            font-size: 2rem;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .order-container {
+            max-width: 600px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-summary {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-summary h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #444;
+        }
+
+        .order-summary p, .order-summary h3 {
+            margin: 5px 0;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #444;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus {
+            outline: none;
+            border-color: #F0BABA;
+            box-shadow: 0 0 5px rgba(240, 186, 186, 0.5);
+        }
+
+        .submit-btn {
+            font-family: radley, serif;
+            width: 100%;
+            background-color: #F0BABA;
+            color: #333;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #e58a8a;
+            color: black;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1rem;
+            text-decoration: none;
+            color: #53aca1;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div class="order-container">
+        <h1>Place Your Order</h1>
+
+        <div class="order-summary">
+            <h2>Order Summary</h2>
+            {% if cart %}
+                {% for item in cart %}
+                    <div class="cart-item">
+                        <p>{{ item.name }} - ${{ item.price }}</p>
+                    </div>
+                {% endfor %}
+                <h3>Total: ${{ total_amount }}</h3>
+            {% else %}
+                <p>Your cart is empty.</p>
+            {% endif %}
+        </div>
+
+        {% if cart %}
+            <form action="{{ url_for('submit_order') }}" method="post">
+                <div class="form-group">
+                    <label for="customer_name">Name:</label>
+                    <input type="text" id="customer_name" name="customer_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <button type="submit" class="submit-btn">Place Order</button>
+            </form>
+        {% endif %}
+
+        <a href="{{ url_for('view_cart') }}">Back to Cart</a>
+    </div>
+</body>
+</html>

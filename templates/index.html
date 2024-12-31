@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+                font-family: "Radley", serif;
+                background:linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),  url("static/images/background1.jpeg") no-repeat center center fixed;
+                background-size: cover;
+                text-align: center;
+                color: #333;
+            }
+        h1 {
+                background-color: #D5F0ED;
+                padding: 30px;
+                font-size: 2.5em;
+                color: #333;
+                margin: 0;
+            }
+        a {
+                text-decoration: none;
+                color:#333;
+                display: inline-block;
+                margin: 30px 0;
+                background-color: #F0BABA;
+                border: 1.5px solid #000;
+                cursor: pointer;
+                border-radius: 10px;
+                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+                padding: 15px 25px;
+                font-size: 1.7em;
+                width: 50%;
+                height: 30px;
+                text-align: center;
+            }
+            a:hover {
+                background-color: #f08484;
+            }
+    </style>
+</head>
+<body>
+    <h1>Link & Loaf - Admin Dashboard</h1>
+    
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('home') }}">Go to Home Page</a><br>
+    <a href="{{ url_for('add_item') }}">Add Product</a><br>
+    <a href="{{ url_for('update_item') }}">Update Product</a><br>
+    <a href="{{ url_for('remove_item') }}">Remove Product</a><br>
+    <a href="{{ url_for('view_orders') }}">View orders</a><br>
+</body>
+</html>

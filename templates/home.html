@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link & Loaf</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-image: url('/static/images/realbg.jpeg'); /* Path to your background image */
+            background-size: cover; /* Makes sure the background image covers the whole page */
+            background-position: center; /* Centers the background image */
+            color: #000; /* Default text color to black */
+        }
+
+        /* Navbar styling */
+        .appbar {
+            background-color: #d8f0ee;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 24px;
+            font-weight: bold;
+            color: #000; /* Navbar text color */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        /* Container for buttons */
+        .navbar-buttons {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* View Cart button on the left */
+        .view-cart {
+            margin-right: auto; /* Pushes this button to the left */
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffF;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .view-cart:hover {
+            background-color: #86d6d1;
+        }
+
+        /* Title in the center */
+        .appbar h1 {
+            text-align: center;
+            flex-grow: 1;  /* Center the title by making it grow */
+            margin: 0;
+            font-size: 36px;
+            color: #000; /* Title text color */
+        }
+
+        /* Menu button on the right */
+        .menu {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #fFF;
+            color: rgb(7, 7, 7);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .menu:hover {
+            background-color: #86d6d1;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f1f1f1;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 16px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Content padding for spacing */
+        .content {
+            padding: 20px;
+            margin-top: 140px;
+        }
+
+        /* Styling for items container */
+        .items-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .item {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .item h3 {
+            margin: 10px 0;
+            color: black; /* Item name color */
+        }
+
+        .item p {
+            margin: 10px 0;
+            color: black; /* Item price color */
+        }
+
+        .item button {
+            background-color: #86d6d1;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .item button:hover {
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="appbar">
+        <div class="navbar-buttons">
+            <!-- View Cart Button (Left) -->
+            <button class="view-cart" onclick="window.location.href='{{ url_for('view_cart') }}';">View Cart</button>
+
+
+            <!-- Link & Loaf Title (Center) -->
+            <h1>LINK & LOAF</h1>
+
+            <!-- Menu Button (Right) -->
+            <div class="dropdown">
+                <button class="menu">Menu</button>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('admin_login') }}">Admin Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>Traverse Through Our Delicacies</h1>
+        <div class="items-container">
+            {% for item in items %}
+            <div class="item">
+                <h3>{{ item.name }}</h3>
+                <p>Price: ${{ item.price }}</p>
+                <form action="{{ url_for('buy_item') }}" method="POST">
+                    <input type="hidden" name="item_name" value="{{ item.name }}">
+                    <input type="hidden" name="item_price" value="{{ item.price }}">
+                    <button type="submit">Buy</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

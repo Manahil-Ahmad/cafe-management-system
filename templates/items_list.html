@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items List</title>
+    <script>
+        function addToCart(event, itemName, itemPrice) {
+            event.preventDefault();  // Prevent the form from submitting and redirecting
+            
+            // Create form data
+            var formData = new FormData();
+            formData.append('item_name', itemName);
+            formData.append('item_price', itemPrice);
+            
+            // Send the form data to the server using AJAX
+            fetch("/buy_item", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())  // Parse the JSON response
+            .then(data => {
+                // Handle the response from the backend
+                if (data.success) {
+                    alert('Item added to cart: ' + data.message);
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error processing your request.');
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Items</h1>
+    <ul>
+        {% for item in items %}
+            <li>{{ item.name }} - ${{ item.price }}
+                <!-- Form to Buy Item -->
+                <form onsubmit="addToCart(event, '{{ item.name }}', '{{ item.price }}')" style="display:inline;">
+                    <button type="submit">Buy</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{{ url_for('view_cart') }}">View Cart</a>
+    
+</body>
+</html>

@@ -1,0 +1,9 @@
+chocolate cake,12.0
+blueberry muffin,12.0
+
+apple tart,200.0
+banana bread,2.0
+simple bread,8.8
+fruit trifle,2.0
+three milk cake,23.0
+strawberyy ice cream,45.0
